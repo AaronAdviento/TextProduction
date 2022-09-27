@@ -34,14 +34,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: Maven@3
+- task: PublishPipelineArtifact@1
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'publish'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
