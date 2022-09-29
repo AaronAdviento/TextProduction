@@ -38,3 +38,7 @@ steps:
   inputs:
     targetPath: '$(Pipeline.Workspace)'
     publishLocation: 'pipeline'
+
+- task: CmdLine@2
+  inputs:
+    script: 'java -jar $(build.SourcesDirectory)/tools/version2image.jar $(fullVersionText) $(androidVersionFileLocation)'
