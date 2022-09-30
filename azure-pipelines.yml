@@ -30,6 +30,9 @@ steps:
   inputs:
     targetPath: '$(Pipeline.Workspace)'
     publishLocation: 'pipeline'
+    **/*
+!*.txt
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
