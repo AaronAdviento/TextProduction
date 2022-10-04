@@ -35,8 +35,16 @@ steps:
   inputs:
     artifactsFeeds: 'robertjanisch'
     
-- task: CmdLine@2
+- 
+- task: Maven@3
   inputs:
-    script: |
-      mvn build
-      mvn deploy
+    mavenPomFile: 'pom.xml'
+    goals: 'deploy'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: true
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    options: '--settings .mvn/settings.xml'
