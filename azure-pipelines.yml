@@ -11,7 +11,7 @@ pool:
 
 steps:
 
-- task: Maven@3
+- task: Maven@3 #creates .jar file, which can be executed
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -22,27 +22,31 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: CmdLine@2
+- task: CmdLine@2 #executes .jar file
   inputs:
     script: 'java -jar /home/vsts/work/1/s/target/TextProduction-1.0-SNAPSHOT.jar'
 
-- task: PublishPipelineArtifact@1
+- task: PublishPipelineArtifact@1 #publishes all files in target, allowing for download
   inputs:
     targetPath: $(Pipeline.Workspace)
     publishLocation: 'pipeline'
     
-- task: MavenAuthenticate@0
+- task: CmdLine@2
   inputs:
-    artifactsFeeds: 'robertjanisch'
-
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'deploy'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    script: |
+      echo
+      
+      <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                                    https://maven.apache.org/xsd/settings-1.0.0.xsd">
+        <servers>
+          <server>
+            <id>robertjanisch</id>
+            <username>robertjanisch</username>
+            <password>tn47whlqau4fddk6tuolkgukt5phtmte7z4aehd4sm56nkyuir6q</password>
+          </server>
+        </servers>
+      </settings>
+      
+      > settings.xml
