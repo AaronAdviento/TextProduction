@@ -34,19 +34,5 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo
-      
-      <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                                    https://maven.apache.org/xsd/settings-1.0.0.xsd">
-        <servers>
-          <server>
-            <id>robertjanisch</id>
-            <username>robertjanisch</username>
-            <password>tn47whlqau4fddk6tuolkgukt5phtmte7z4aehd4sm56nkyuir6q</password>
-          </server>
-        </servers>
-      </settings>
-      
-      > settings.xml
+      mvn build
+      mvn deploy
