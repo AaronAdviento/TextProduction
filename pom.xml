@@ -42,6 +42,12 @@
         <repository>
             <id>robertjanisch</id>
             <url>https://pkgs.dev.azure.com/robertjanisch/_packaging/robertjanisch/maven/v1</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </distributionManagement>
          
