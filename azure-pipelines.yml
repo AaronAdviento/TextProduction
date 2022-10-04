@@ -34,5 +34,6 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
+      mvn install
       mvn build
       mvn deploy
