@@ -31,14 +31,6 @@ steps:
     targetPath: $(Pipeline.Workspace)
     publishLocation: 'pipeline'
 
-- task: Maven@3
+- task: CmdLine@2
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'install'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    script: 'mvn deploy'
