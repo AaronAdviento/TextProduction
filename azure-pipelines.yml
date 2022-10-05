@@ -35,14 +35,12 @@ steps:
   inputs:
     artifactsFeeds: 'robertjanisch'
     
-- task: Maven@3
+- task: GitHubRelease@1
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'deploy'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: true
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    gitHubConnection: 'TextProduction --> Github'
+    repositoryName: 'AaronAdviento/TextProductionArtifacts'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'gitTag'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
